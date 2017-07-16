@@ -28,8 +28,9 @@ public class ExplorerController {
         List<String> tagList = Arrays.asList(tags);
         PageRequest pageRequest = new PageRequest(page, size);
         List<Playlist> playlists = exploreService.findPlaylistsWithAllTags(tagList, pageRequest);
+        List<Playlist> allPlaylists = exploreService.findPlaylistsWithAllTags(tagList, null);
         List<String> subTags = new ArrayList<>();
-        playlists.forEach(playlist -> {
+        allPlaylists.forEach(playlist -> {
             playlist.getTags().forEach(tag -> {
                 if(!tagList.contains(tag.getName()) && !subTags.contains(tag.getName())) {
                     subTags.add(tag.getName());

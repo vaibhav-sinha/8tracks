@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by vaibhav on 15/07/17.
@@ -19,6 +20,11 @@ public class ExploreServiceImpl implements ExploreService {
 
     @Override
     public List<Playlist> findPlaylistsWithAllTags(List<String> tags, PageRequest pageRequest) {
-        return playlistRepository.findByTags(tags, tags.size(), pageRequest.getOffset(), pageRequest.getPageSize());
+        if(pageRequest == null) {
+            return playlistRepository.findByTags(tags.stream().map(String::toUpperCase).collect(Collectors.toList()), tags.size());
+        }
+        else {
+            return playlistRepository.findByTags(tags.stream().map(String::toUpperCase).collect(Collectors.toList()), tags.size(), pageRequest.getOffset(), pageRequest.getPageSize());
+        }
     }
 }
