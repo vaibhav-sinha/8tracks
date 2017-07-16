@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by vaibhav on 15/07/17.
@@ -13,6 +14,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class ExploreResponse implements Serializable {
-    List<String> tags;
+    Set<String> tags;
     List<Playlist> playlists;
 }

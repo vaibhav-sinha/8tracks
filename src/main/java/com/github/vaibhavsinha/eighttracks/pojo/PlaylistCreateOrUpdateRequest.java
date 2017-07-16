@@ -1,5 +1,6 @@
 package com.github.vaibhavsinha.eighttracks.pojo;
 
+import com.github.vaibhavsinha.eighttracks.util.ListUtils;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -20,8 +21,6 @@ public class PlaylistCreateOrUpdateRequest implements Serializable {
     Integer plays;
 
     public List<String> getTags() {
-        Set<String> set = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-        set.addAll(tags);
-        return new ArrayList<>(set);
+       return ListUtils.doCaseInsensitiveDedup(tags);
     }
 }
